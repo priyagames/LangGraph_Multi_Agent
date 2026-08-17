@@ -1,0 +1,55 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 1538 >>
+stream
+BT /F1 12 Tf 72 760 Td (Priya Sharma) Tj ET
+BT /F1 12 Tf 72 742 Td (Senior Software Engineer) Tj ET
+BT /F1 12 Tf 72 724 Td (Bangalore, India) Tj ET
+BT /F1 12 Tf 72 706 Td () Tj ET
+BT /F1 12 Tf 72 688 Td (SUMMARY) Tj ET
+BT /F1 12 Tf 72 670 Td (Experienced backend engineer with 5+ years of building scalable APIs, cloud services, and distributed systems.) Tj ET
+BT /F1 12 Tf 72 652 Td (Strong experience in Python, FastAPI, SQL, and microservices architecture.) Tj ET
+BT /F1 12 Tf 72 634 Td () Tj ET
+BT /F1 12 Tf 72 616 Td (SKILLS) Tj ET
+BT /F1 12 Tf 72 598 Td (Python, FastAPI, Flask, SQL, PostgreSQL, MongoDB, Redis, Docker, Kubernetes, AWS, Git) Tj ET
+BT /F1 12 Tf 72 580 Td () Tj ET
+BT /F1 12 Tf 72 562 Td (EXPERIENCE) Tj ET
+BT /F1 12 Tf 72 544 Td (Senior Software Engineer | Acme Technologies | 2022 - Present) Tj ET
+BT /F1 12 Tf 72 526 Td (- Designed scalable backend APIs for customer workflows and billing integrations.) Tj ET
+BT /F1 12 Tf 72 508 Td (- Improved API response time by 35% through query optimization and caching.) Tj ET
+BT /F1 12 Tf 72 490 Td () Tj ET
+BT /F1 12 Tf 72 472 Td (Software Engineer | Beta Labs | 2019 - 2022) Tj ET
+BT /F1 12 Tf 72 454 Td (- Built Python services for data ingestion and notifications.) Tj ET
+BT /F1 12 Tf 72 436 Td (- Worked with PostgreSQL and MongoDB in production systems.) Tj ET
+BT /F1 12 Tf 72 418 Td () Tj ET
+BT /F1 12 Tf 72 400 Td (EDUCATION) Tj ET
+BT /F1 12 Tf 72 382 Td (B.Tech in Computer Science) Tj ET
+BT /F1 12 Tf 72 364 Td (National Institute of Technology, Karnataka) Tj ET
+
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000001831 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1901
+%%EOF

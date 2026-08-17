@@ -1,0 +1,27 @@
+Priya Sharma
+Senior Software Engineer
+Bangalore, India
+
+SUMMARY
+Experienced backend engineer with 5+ years of building scalable APIs, cloud services, and distributed systems. Strong experience in Python, FastAPI, SQL, and microservices architecture. Comfortable collaborating with product and data teams to ship business-critical services.
+
+SKILLS
+Python, FastAPI, Flask, SQL, PostgreSQL, MongoDB, Redis, Docker, Kubernetes, AWS, Git, REST APIs, system design
+
+EXPERIENCE
+Senior Software Engineer | Acme Technologies | 2022 - Present
+- Designed and maintained high-throughput backend APIs for customer workflows and billing integrations.
+- Improved API response time by 35% through caching, query optimization, and async job processing.
+- Collaborated with product managers to ship new features used by 100k+ customers.
+
+Software Engineer | Beta Labs | 2019 - 2022
+- Built Python services for data ingestion, notifications, and internal tooling.
+- Worked with PostgreSQL and MongoDB for application data and analytics pipelines.
+- Deployed services on AWS with Docker and CI/CD automation.
+
+EDUCATION
+B.Tech in Computer Science
+National Institute of Technology, Karnataka
+
+CERTIFICATIONS
+AWS Certified Developer Associate
