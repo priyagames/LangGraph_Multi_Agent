@@ -68,28 +68,33 @@
   }
 
   .msg {
-    padding: 10px 14px;
+    padding: 12px 14px;
     border-radius: 14px;
-    max-width: 78%;
+    max-width: 82%;
     white-space: pre-wrap;
-    line-height: 1.45;
+    line-height: 1.55;
     font-size: 0.95rem;
-    box-shadow: 0 1px 2px rgba(30, 41, 59, 0.06);
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.06);
   }
 
   .user {
-    background: #4338ca;
+    background: linear-gradient(135deg, #4338ca, #4f46e5);
     color: white;
     align-self: flex-end;
     border-bottom-right-radius: 4px;
   }
 
   .assistant {
-    background: white;
+    background: #ffffff;
     color: #1e293b;
     align-self: flex-start;
     border-bottom-left-radius: 4px;
     border: 1px solid #e2e8f0;
+    padding-left: 16px;
+  }
+
+  .assistant strong {
+    color: #111827;
   }
 
   .assistant.thinking {
@@ -102,15 +107,22 @@
     background: #fffbeb;
   }
 
-  form {
+  .composer {
     display: flex;
+    flex-direction: column;
     gap: 10px;
     padding: 16px 20px;
     background: white;
     border-top: 1px solid #e2e8f0;
   }
 
-  input {
+  .composer-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  input[type="text"] {
     flex: 1;
     padding: 12px 14px;
     border: 1px solid #d1d5db;
@@ -120,8 +132,25 @@
     transition: border-color 0.15s;
   }
 
-  input:focus {
+  input[type="text"]:focus {
     border-color: #6366f1;
+  }
+
+  .upload-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    background: #f8fafc;
+    color: #334155;
+    font-size: 0.88rem;
+    cursor: pointer;
+  }
+
+  .upload-wrap input {
+    display: none;
   }
 
   button {
@@ -156,9 +185,15 @@
 
   <div id="chat"></div>
 
-  <form id="chat-form">
-    <input id="message" type="text" placeholder="Paste a job description..." autocomplete="off">
-    <button id="send-btn" type="submit">Send</button>
+  <form id="chat-form" class="composer">
+    <div class="composer-row">
+      <label class="upload-wrap" for="resume-file">
+        <span>📎 Resume</span>
+        <input id="resume-file" type="file" accept=".pdf,.docx,.txt,.md">
+      </label>
+      <input id="message" type="text" placeholder="Paste a job description or ask for a qualification score..." autocomplete="off">
+      <button id="send-btn" type="submit">Send</button>
+    </div>
   </form>
 </div>
 
@@ -167,6 +202,7 @@ const chat = document.getElementById("chat");
 const form = document.getElementById("chat-form");
 const input = document.getElementById("message");
 const sendBtn = document.getElementById("send-btn");
+const fileInput = document.getElementById("resume-file");
 
 // null = no pipeline run in progress; the next message starts a fresh submission.
 // set = the pipeline is paused waiting on an answer for this thread.
@@ -181,22 +217,47 @@ function addMessage(role, text, extraClass) {
   return div;
 }
 
+function readFileAsBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const result = reader.result || "";
+      const base64 = String(result).split(",")[1] || "";
+      resolve(base64);
+    };
+    reader.onerror = () => reject(new Error("Failed to read resume file."));
+    reader.readAsDataURL(file);
+  });
+}
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const message = input.value.trim();
-  if (!message) return;
+  if (!message && !fileInput.files[0]) return;
 
-  addMessage("user", message);
+  const selectedFile = fileInput.files[0];
+  addMessage("user", selectedFile ? `${message || "Upload resume"} [resume: ${selectedFile.name}]` : message);
   input.value = "";
+  fileInput.value = "";
   sendBtn.disabled = true;
 
   const thinking = addMessage("assistant", "Thinking...", "thinking");
 
   try {
+    let payload = { message, thread_id: currentThreadId };
+    if (selectedFile) {
+      const resumeBase64 = await readFileAsBase64(selectedFile);
+      payload = {
+        ...payload,
+        resume_base64: resumeBase64,
+        resume_filename: selectedFile.name,
+      };
+    }
+
     const res = await fetch("/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ message, thread_id: currentThreadId }),
+      body: JSON.stringify(payload),
     });
     const data = await res.json();
 
@@ -208,10 +269,10 @@ form.addEventListener("submit", async (e) => {
     if (!data.done) {
       input.placeholder = "Your answer...";
     } else {
-      input.placeholder = "Paste a job description...";
+      input.placeholder = "Paste a job description or ask for a qualification score...";
     }
   } catch (err) {
-    thinking.textContent = "Error: could not reach the pipeline.";
+    thinking.textContent = err.message || "Error: could not reach the pipeline.";
     thinking.classList.remove("thinking");
   } finally {
     sendBtn.disabled = false;
